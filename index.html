@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Math Quiz Competition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta property="og:title" content="School Math Quiz Competition" />
+  <meta property="og:description" content="Track Grade 10, 11, and 12 Math Quiz matchups and results." />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+
+  <header>
+    <h1>School Math Quiz Competition</h1>
+    <p>The ultimate showdown for Grade 10, 11, and 12</p>
+  </header>
+
+  <section class="intro">
+    <div class="intro-text">
+      <h2>About the Competition</h2>
+      <p>
+        Bringing together the brightest minds to solve the toughest problems. 
+        Track real-time updates and see which grade dominates the leaderboard!
+      </p>
+    </div>
+    <div class="intro-animation">
+      <div class="math-icon">∑</div>
+      <div class="math-icon">π</div>
+      <div class="math-icon">√</div>
+      <div class="math-icon">∞</div>
+    </div>
+  </section>
+
+  <section class="near-matches">
+    <div class="section-header">
+      <h2>🚀 Match Center</h2>
+      <p>Upcoming & Recent Battles</p>
+    </div>
+    <div id="live-updates-container" class="live-grid">
+       <div class="loader">Scanning the brackets for live updates...</div>
+    </div>
+  </section>
+
+  <section class="grades">
+    <h2>Full Brackets</h2>
+    <div class="grade-buttons">
+      <a href="/grades/grade10.html" class="grade-btn">Grade 10</a>
+      <a href="/grades/grade11.html" class="grade-btn">Grade 11</a>
+      <a href="/grades/grade12.html" class="grade-btn">Grade 12</a>
+    </div>
+  </section>
+
+  <script src="/static/home.js"></script>
+</body>
+</html>

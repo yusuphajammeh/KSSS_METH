@@ -1,0 +1,88 @@
+{
+  "grade": "10",
+  "competition": "School Math Quiz Competition",
+  "rounds": [
+    {
+      "id": 1,
+      "name": "Round 1",
+      "matches": [
+        {
+          "id": 1,
+          "schedule": { "date": "Sat, Feb 14", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Zainab 1", "points": null },
+          "teamB": { "name": "Umar 2 / Umar 3", "points": null },
+          "winner": null
+        },
+        {
+          "id": 2,
+          "schedule": { "date": "Sat, Feb 14", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Ebrima", "points": null },
+          "teamB": { "name": "Aisha 3", "points": null },
+          "winner": null
+        },
+        {
+          "id": 3,
+          "schedule": { "date": "Sat, Feb 14", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Saffiah 1", "points": null },
+          "teamB": { "name": "Aisha 2", "points": null },
+          "winner": null
+        },
+        {
+          "id": 4,
+          "schedule": { "date": "Sat, Feb 14", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Ousman", "points": null },
+          "teamB": { "name": "Umar 1 / Bilal", "points": null },
+          "winner": null
+        },
+        {
+          "id": 5,
+          "schedule": { "date": "Sat, Feb 14", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Ali", "points": null },
+          "teamB": { "name": "Fatimah 2", "points": null },
+          "winner": null
+        },
+        {
+          "id": 6,
+          "schedule": { "date": "Sat, Feb 21", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Hamza", "points": null },
+          "teamB": { "name": "Naffisah 2", "points": null },
+          "winner": null
+        },
+        {
+          "id": 7,
+          "schedule": { "date": "Sat, Feb 21", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Zainab 2", "points": null },
+          "teamB": { "name": "Roheyah", "points": null },
+          "winner": null
+        },
+        {
+          "id": 8,
+          "schedule": { "date": "Sat, Feb 21", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Aisha 1 / Roheyah", "points": null },
+          "teamB": { "name": "Naffisah 1", "points": null },
+          "winner": null
+        },
+        {
+          "id": 9,
+          "schedule": { "date": "Sat, Feb 21", "time": "10:00 AM", "location": "Maths Lab" },
+          "teamA": { "name": "Fatimah 1", "points": null },
+          "teamB": { "name": "Saffiah 2", "points": null },
+          "winner": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Best Loser Match",
+      "matches": [
+        {
+          "id": 10,
+          "schedule": { "date": "Pending", "time": "TBD", "location": "Maths Lab" },
+          "teamA": { "name": "TBD (Round 1 Loser)", "points": null },
+          "teamB": { "name": "TBD (Round 1 Loser)", "points": null },
+          "winner": null
+        }
+      ]
+    }
+  ]
+}
