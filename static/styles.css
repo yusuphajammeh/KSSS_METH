@@ -126,6 +126,28 @@ h1 {
   flex-shrink: 0;            /* keep boxes from shrinking */
 }
 
+/* Navigation container */
+.back-nav {
+  margin-bottom: 20px;
+}
+
+/* The button styling */
+.back-home-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #3b82f6; /* Matching your theme color */
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.back-home-btn:hover {
+  background-color: #1e40af;
+}
+
 /* Optional: different colors for each */
 .schedule-date { background-color: #e0f2fe; }      /* light blue */
 .schedule-time { background-color: #fef3c7; }      /* light yellow */

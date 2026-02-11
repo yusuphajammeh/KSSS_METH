@@ -19,11 +19,6 @@ header h1 {
   animation: fadeInDown 1s ease forwards;
 }
 
-header p {
-  font-size: 18px;
-  animation: fadeInUp 1s ease forwards;
-}
-
 .intro {
   display: flex;
   flex-wrap: wrap;
@@ -33,19 +28,7 @@ header p {
   gap: 40px;
 }
 
-.intro-text {
-  max-width: 500px;
-  animation: fadeInLeft 1s ease forwards;
-}
-
-.intro-animation {
-  display: flex;
-  gap: 20px;
-  font-size: 50px;
-  animation: float 3s ease-in-out infinite alternate;
-}
-
-/* Match Center Styling */
+/* Match Center Grid */
 .near-matches {
   padding: 40px 20px;
   background: rgba(255, 255, 255, 0.5);
@@ -64,6 +47,7 @@ header p {
   margin: 0 auto;
 }
 
+/* Individual Match Card */
 .live-card {
   background: white;
   padding: 24px;
@@ -71,6 +55,7 @@ header p {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   border-left: 5px solid #3b82f6;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .live-card:hover {
@@ -101,6 +86,7 @@ header p {
   color: #94a3b8;
   font-size: 14px;
   font-weight: 400;
+  margin: 0 10px;
 }
 
 .card-meta {
@@ -108,6 +94,7 @@ header p {
   font-size: 13px;
   border-top: 1px solid #f1f5f9;
   padding-top: 10px;
+  line-height: 1.6;
 }
 
 /* Grade Buttons */
@@ -140,11 +127,13 @@ header p {
 
 /* Animations */
 @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes float { from { transform: translateY(0); } to { transform: translateY(-15px); } }
 
+.math-icon {
+  font-size: 50px;
+  animation: float 3s ease-in-out infinite alternate;
+}
+
 @media (max-width: 768px) {
-  .intro { flex-direction: column; text-align: center; }
   .grade-buttons { flex-direction: column; }
 }
