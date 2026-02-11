@@ -1,6 +1,6 @@
 let pageName = window.location.pathname.split("/").pop();
 let grade = pageName.replace(".html", "");
-let jsonFile = `/data/competition-${grade}.json`;
+let jsonFile = `data/competition-${grade}.json`;
 
 fetch(jsonFile)
   .then(res => res.json())
