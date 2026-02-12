@@ -1,58 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>School Math Quiz Competition</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta property="og:title" content="School Math Quiz Competition" />
-  <meta property="og:description" content="Track Grade 10, 11, and 12 Math Quiz matchups and results." />
-  <meta property="og:type" content="website" />
-
-  <link rel="stylesheet" href="static/home.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSSS Math Quiz</title>
+    <link rel="stylesheet" href="static/home.css">
 </head>
 <body>
 
-  <header>
-    <h1>School Math Quiz Competition</h1>
-    <p>The ultimate showdown for Grade 10, 11, and 12</p>
-  </header>
+    <header class="school-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="KSSS Logo" class="school-logo" onerror="this.parentElement.className='logo-placeholder';">
+            </div>
+            <p class="school-name">KOTU SENIOR SECONDARY SCHOOL</p>
+        </div>
+    </header>
 
-  <section class="intro">
-    <div class="intro-text">
-      <h2>About the Competition</h2>
-      <p>
-        Bringing together the brightest minds to solve the toughest problems. 
-        Track real-time updates and see which grade dominates the leaderboard!
-      </p>
-    </div>
-    <div class="intro-animation">
-      <div class="math-icon">∑</div>
-      <div class="math-icon">π</div>
-      <div class="math-icon">√</div>
-      <div class="math-icon">∞</div>
-    </div>
-  </section>
+    <section class="competition-banner">
+        <h1>MATHEMATICS DEPARTMENT QUIZ COMPETITION</h1>
+        <p>Igniting Excellence through Numbers</p>
+    </section>
 
-  <section class="near-matches">
-    <div class="section-header">
-      <h2>🚀 Match Center</h2>
-      <p>Upcoming & Recent Battles</p>
-    </div>
-    <div id="live-updates-container" class="live-grid">
-       <div class="loader">Scanning the brackets for live updates...</div>
-    </div>
-  </section>
+    <nav class="tab-nav">
+        <ul>
+            <li><a href="index.html" class="active">HOME</a></li>
+            <li><a href="grades/grade10.html">GRADE 10</a></li>
+            <li><a href="grades/grade11.html">GRADE 11</a></li>
+            <li><a href="grades/grade12.html">GRADE 12</a></li>
+        </ul>
+    </nav>
 
-  <section class="grades">
-    <h2>Full Brackets</h2>
-    <div class="grade-buttons">
-      <a href="grades/grade10.html" class="grade-btn">Grade 10</a>
-      <a href="grades/grade11.html" class="grade-btn">Grade 11</a>
-      <a href="grades/grade12.html" class="grade-btn">Grade 12</a>
-    </div>
-  </section>
+    <main class="main-content">
+        <div class="info-grid">
+            <div class="rules-card">
+                <h2>General Rules & Conduct</h2>
+                <ul class="rules-list">
+                    <li>Each class is invited to send <strong>ONLY TWO</strong> participants.</li>
+                    <li>It is mandatory for all students to wear <strong>school uniforms</strong>.</li>
+                    <li><strong>No communication</strong> is allowed between participants and the audience. Failure to comply results in a <strong>5-point deduction</strong>.</li>
+                    <li>Participants are permitted to use <strong>ONLY simple calculators</strong> (Strictly NO FX/Scientific calculators).</li>
+                    <li>Participants must arrive at the School Hall by <strong>11:18 AM</strong> for a prompt 11:20 AM start.</li>
+                </ul>
+            </div>
 
-  <script src="static/home.js"></script>
+            <div class="scoring-card">
+                <h2>Scoring System</h2>
+                <div class="scoring-item">
+                    <span class="attempt">1st Attempt (2 mins)</span>
+                    <span class="points">+5 Points</span>
+                </div>
+                <div class="scoring-item">
+                    <span class="attempt">2nd Attempt (2 mins)</span>
+                    <span class="points">+3 Points</span>
+                </div>
+                <div class="scoring-item">
+                    <span class="attempt">Bonus (Passed Question)</span>
+                    <span class="points">+2 Points</span>
+                </div>
+                <p class="note">Opponents have 45 seconds to answer a passed question.</p>
+            </div>
+        </div>
+
+        <section class="near-matches">
+            <div class="section-header">
+                <h2>🚀 Match Center</h2>
+                <p>Upcoming & Recent Battles</p>
+            </div>
+            <div id="live-updates-container" class="live-grid">
+                <div class="loader">Scanning brackets for updates...</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="static/home.js"></script>
 </body>
 </html>

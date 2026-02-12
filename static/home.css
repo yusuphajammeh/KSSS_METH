@@ -1,165 +1,274 @@
+/* --- GLOBAL STYLES --- */
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, #f0f4f8, #e2e8f0);
-  color: #1e293b;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    overflow-x: hidden;
 }
 
-header {
-  text-align: center;
-  padding: 60px 20px 40px;
-  background: #3b82f6;
-  color: white;
+/* --- HEADER & LOGO --- */
+.school-header {
+    background: white;
+    padding: 10px 80px;
+    border-bottom: 1px solid #ddd;
 }
 
-header h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
-  animation: fadeInDown 1s ease forwards;
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.intro {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 20px;
-  gap: 40px;
+.logo-container {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
 }
 
-/* Match Center Grid */
-.near-matches {
-  padding: 40px 20px;
-  background: rgba(255, 255, 255, 0.5);
+.school-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 30px;
+.school-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0d47a1;
+    margin: 0;
 }
 
+/* --- BLUE BANNER --- */
+.competition-banner {
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+    color: white;
+    padding: 40px 80px;
+}
+
+.competition-banner h1 {
+    margin: 0;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+/* --- NAVIGATION --- */
+.tab-nav { 
+    background: #fff; 
+    border-bottom: 2px solid #e0e0e0; 
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.tab-nav ul { 
+    list-style: none; 
+    margin: 0; 
+    padding: 0 80px; 
+    display: flex; 
+    overflow-x: auto; 
+}
+.tab-nav a { 
+    display: block; 
+    padding: 15px 20px; 
+    text-decoration: none; 
+    color: #666; 
+    font-weight: 600; 
+    white-space: nowrap;
+}
+.tab-nav a.active { color: #0d47a1; border-bottom: 3px solid #0d47a1; }
+
+/* --- MAIN CONTENT LAYOUT --- */
+.main-content { padding: 30px 80px; }
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* --- RULES & SCORING (PLAIN TEXT - NO CARDS) --- */
+.rules-card, .scoring-card {
+    padding: 10px 0;
+    /* REMOVED: background, box-shadow, border-radius */
+}
+
+.rules-card h2, .scoring-card h2 {
+    font-size: 22px;
+    color: #0d47a1;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.rules-list { padding-left: 20px; line-height: 1.8; color: #333; }
+
+.scoring-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+
+.points {
+    /* Base points style */
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* --- MATCH CENTER (IDENTICAL TO STYLES.CSS) --- */
 .live-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
 }
 
-/* Individual Match Card */
-.live-card {
+/* --- CARD STYLES COPIED FROM STYLES.CSS --- */
+.match {
+  display: flex;
+  flex-direction: column; /* Stack schedule on top, teams below */
+  align-items: center;
   background: white;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  border-left: 5px solid #3b82f6;
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.match:hover {
+  transform: translateY(-2px);
+}
+
+.match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
   position: relative;
 }
 
-.live-card:hover {
-  transform: translateY(-5px);
-}
-
-.card-tag {
-  display: inline-block;
-  background: #eff6ff;
-  color: #3b82f6;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.card-teams {
-  font-size: 18px;
-  font-weight: 700;
+.team {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 12px;
+  font-size: 16px;
+  max-width: calc(50% - 30px);
 }
 
-.vs-label {
-  color: #94a3b8;
+.team:first-child {
+  justify-content: flex-start;
+}
+
+.team:last-child {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  text-align: right;
+}
+
+.team-name {
+  font-weight: 500;
+}
+
+/* Specific points style for inside the match card */
+.match .points {
   font-size: 14px;
-  font-weight: 400;
-  margin: 0 10px;
-}
-
-.card-meta {
-  color: #64748b;
-  font-size: 13px;
-  border-top: 1px solid #f1f5f9;
-  padding-top: 10px;
-  line-height: 1.6;
-}
-
-/* Grade Buttons */
-.grades {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+  min-width: 50px;
   text-align: center;
-  padding: 50px 20px;
+  display: none; /* Hidden by default, shown by JS */
 }
 
-.grade-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+.vs {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  color: #475569;
+  z-index: 2;
 }
 
-.grade-btn {
-  padding: 15px 30px;
-  background: #3b82f6;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
+.leading {
   font-weight: 600;
-  transition: 0.3s;
+  color: #065f46;
 }
 
-.grade-btn:hover {
-  background: #2563eb;
-  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+.winner {
+  border: 2px solid #22c55e;
+  background: #dcfce7;
+  border-radius: 8px;
+  padding: 4px 6px;
 }
 
-/* Animations */
-@keyframes fadeInDown 
-{ 
-  from 
-  { 
-    opacity: 0; 
-    transform: 
-    translateY(-20px); 
-  } 
-  to 
-  { 
-    opacity: 1; 
-    transform: 
-    translateY(0); 
-  } 
-}
-@keyframes float 
-{ 
-  from 
-  { 
-    transform: 
-    translateY(0); 
-  } 
-  to 
-  { 
-    transform: 
-    translateY(-15px); 
-  } 
+/* Match Schedule Layout */
+.match-schedule {
+  display: flex;             
+  justify-content: center;   
+  gap: 16px;                 
+  margin-bottom: 12px;
+  width: 100%;
+  white-space: nowrap;       
 }
 
-.math-icon {
-  font-size: 50px;
-  animation: float 3s ease-in-out infinite alternate;
+.match-schedule div {
+  background-color: #f1f5f9; 
+  color: #1e293b;            
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;            
 }
 
+.schedule-date { background-color: #e0f2fe !important; }      
+.schedule-time { background-color: #fef3c7 !important; }      
+.schedule-location { background-color: #e0f7fa !important; }  
+
+/* Grade Tag (Specific to Home) */
+.card-tag {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: #0d47a1;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* --- MOBILE OPTIMIZATION --- */
 @media (max-width: 768px) {
-  .grade-buttons { flex-direction: column; }
+    /* Layout Tweaks */
+    .school-header, .competition-banner, .tab-nav ul, .main-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .info-grid { grid-template-columns: 1fr; }
+    .competition-banner h1 { font-size: 22px; }
+    .tab-nav ul { padding: 0 10px; }
+
+    /* Match Card Mobile Styles (From styles.css) */
+    .match { padding: 14px; }
+    .team { flex: 1; min-width: 0; }
+    .team-name { font-size: 14px; line-height: 1.3; word-break: break-word; overflow-wrap: anywhere; }
+    .match .points { font-size: 12px; min-width: 44px; padding: 3px 6px; }
+    .vs { font-size: 13px; background: white; padding: 0 6px; }
+    
+    @media (max-width: 400px) {
+        .match-schedule { 
+            flex-direction: column; 
+            gap: 6px; 
+        }
+    }
 }
