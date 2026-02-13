@@ -149,9 +149,10 @@ h1 {
 }
 
 /* Optional: different colors for each */
-.schedule-date { background-color: #e0f2fe; }      /* light blue */
-.schedule-time { background-color: #fef3c7; }      /* light yellow */
-.schedule-location { background-color: #e0f7fa; }  /* light teal */
+/* Use the parent class to increase specificity */
+.match-schedule .schedule-date { background-color: #e0f2fe; }     /* light blue */
+.match-schedule .schedule-time { background-color: #fef3c7; }     /* light yellow */
+.match-schedule .schedule-location { background-color: #e0f7fa; } /* light teal */ /* light teal */
 
 /* =========================
    Mobile Optimization
