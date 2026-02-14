@@ -13,9 +13,9 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Zainab 1", "points": null },
-          "teamB": { "name": "Fatimah 1", "points": null },
-          "winner": null
+          "teamA": { "name": "Zainab 1", "points": 17 },
+          "teamB": { "name": "Fatimah 1", "points": 0 },
+          "winner": "Zainab 1"
         },
         {
           "id": 2,

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTC Admin Panel</title>
+    <link rel="stylesheet" href="static/home.css">
+    <style>
+        body { background: #f0f2f5; padding: 20px; font-family: sans-serif; }
+        .admin-box { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .hidden { display: none; }
+        input, select, button { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; }
+        button { background: #0d47a1; color: white; font-weight: bold; cursor: pointer; border: none; }
+        .match-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; background: #fafafa; }
+        .status { padding: 10px; border-radius: 5px; margin-top: 10px; text-align: center; display: none; }
+    </style>
+</head>
+<body>
+    <div class="admin-box">
+        <h2>🔧 MTC Competition Admin</h2>
+        
+        <div id="login-section">
+            <label>Select Your Role:</label>
+            <select id="admin-name">
+                <option value="">-- Who is editing? --</option>
+                <option value="Coordinator 1">Coordinator 1</option>
+                <option value="Coordinator 2">Coordinator 2</option>
+                <option value="President">MTC President</option>
+                <option value="Secretary">MTC Secretary</option>
+            </select>
+            <input type="password" id="gh-token" placeholder="Paste Fine-Grained Token here">
+            <button onclick="login()">Enter Dashboard</button>
+        </div>
+
+        <div id="grade-section" class="hidden">
+            <label>Select Grade to Edit:</label>
+            <select id="grade-select">
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+            </select>
+            <button onclick="loadMatches()">Load Data</button>
+        </div>
+
+        <div id="editor-section" class="hidden">
+            <div id="matches-list"></div>
+            <button onclick="saveToGitHub()">💾 Save & Publish to Live Site</button>
+        </div>
+
+        <div id="status-msg" class="status"></div>
+    </div>
+    <script src="static/admin.js"></script>
+</body>
+</html>
