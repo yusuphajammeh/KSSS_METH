@@ -145,8 +145,31 @@ function undoChange() {
     if (!currentData || undoStack.length === 0) return;
 
     isApplyingHistory = true;
+    
+    // Store old round count before undo
+    const oldRoundCount = currentData.rounds?.length || 0;
+    
     redoStack.push(cloneCompetitionData(currentData));
     currentData = undoStack.pop();
+    
+    // Check if a round was removed (round generation was reverted)
+    const newRoundCount = currentData.rounds?.length || 0;
+    if (newRoundCount < oldRoundCount && newRoundCount > 0) {
+        // Round was removed - check if last round has Best Loser match that should be cleaned up
+        const lastRound = currentData.rounds[newRoundCount - 1];
+        
+        // Remove Best Loser matches from the newly-unlocked round
+        // Best Loser matches should only exist when preparing for next round generation
+        if (lastRound && lastRound.status !== "locked") {
+            const originalMatchCount = lastRound.matches.length;
+            lastRound.matches = lastRound.matches.filter(m => m.type !== "best_loser");
+            
+            if (CONFIG.debug && lastRound.matches.length < originalMatchCount) {
+                console.log(`Cleaned up Best Loser match from ${lastRound.name} after round revert`);
+            }
+        }
+    }
+    
     isApplyingHistory = false;
 
     renderForm();
@@ -872,9 +895,15 @@ function renderForm() {
             container.appendChild(card);
         });
         
-        // Add round management controls after each round (only for last round if not locked)
+        // Add round management controls:
+        // - Full controls for last round (if not locked)
+        // - Delete button for any unlocked round
         if (rIdx === currentData.rounds.length - 1 && !isLocked) {
+            // Last round gets full management controls
             addRoundManagementControls(container, round, rIdx);
+        } else if (!isLocked) {
+            // Non-last rounds get deletion controls only
+            addRoundDeletionControls(container, round, rIdx);
         }
     });
     
@@ -1172,6 +1201,29 @@ function updateSidebarStats() {
 }
 
 /**
+ * Add deletion controls for non-last rounds
+ */
+function addRoundDeletionControls(container, round, rIdx) {
+    const controlsDiv = document.createElement("div");
+    controlsDiv.style.cssText = "background: #fef2f2; padding: 15px; border-radius: 12px; margin: 20px 0; border: 2px solid #fecaca;";
+    
+    const hasSubsequentRounds = rIdx < currentData.rounds.length - 1;
+    const subsequentCount = currentData.rounds.length - 1 - rIdx;
+    
+    let html = '<div style="font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #991b1b;">⚠️ Round Management</div>';
+    
+    html += `<button onclick="cascadeDeleteRound(${rIdx})" 
+                    style="background: #ef4444; border: 2px solid #991b1b; width: 100%;">\n                🗑️ Delete This Round${hasSubsequentRounds ? ` (+${subsequentCount} subsequent)` : ''}\n            </button>`;
+    
+    if (hasSubsequentRounds) {
+        html += `<div style="font-size: 11px; color: #991b1b; margin-top: 8px; padding: 8px; background: #fee2e2; border-radius: 4px;">\n                ⚠️ Warning: This will cascade delete all rounds from ${round.name} onwards (${subsequentCount + 1} total)\n            </div>`;
+    }
+    
+    controlsDiv.innerHTML = html;
+    container.appendChild(controlsDiv);
+}
+
+/**
  * Add management controls for creating best loser and generating next round
  */
 function addRoundManagementControls(container, round, rIdx) {
@@ -1231,8 +1283,164 @@ function addRoundManagementControls(container, round, rIdx) {
         </button>`;
     }
     
+    // Delete Round Button (cascade delete) - Only for unlocked rounds
+    if (round.status !== "locked") {
+        const hasSubsequentRounds = rIdx < currentData.rounds.length - 1;
+        const subsequentCount = currentData.rounds.length - 1 - rIdx;
+        
+        html += `<button onclick="cascadeDeleteRound(${rIdx})" 
+                        style="background: #ef4444; margin-top: 10px; border: 2px solid #991b1b;">
+            🗑️ Delete This Round${hasSubsequentRounds ? ` (+${subsequentCount} subsequent)` : ''}
+        </button>`;
+        
+        if (hasSubsequentRounds) {
+            html += `<div style="font-size: 11px; color: #991b1b; margin-top: 5px; padding: 5px; background: #fee2e2; border-radius: 4px;">
+                ⚠️ Warning: This will delete all rounds from ${round.name} onwards
+            </div>`;
+        }
+    }
+    
     controlsDiv.innerHTML = html;
     container.appendChild(controlsDiv);
+}
+
+/**
+ * Cascade delete a round and all subsequent rounds
+ * @param {number} rIdx - Index of the round to delete
+ */
+function cascadeDeleteRound(rIdx) {
+    const round = currentData.rounds[rIdx];
+    const totalRounds = currentData.rounds.length;
+    const subsequentCount = totalRounds - rIdx;
+    
+    // Check if round is locked
+    if (round.status === "locked") {
+        alert("Cannot delete a locked round. Locked rounds are finalized and cannot be modified.");
+        return;
+    }
+    
+    // Gather information for confirmation
+    const roundsToDelete = currentData.rounds.slice(rIdx);
+    const totalMatchesToDelete = roundsToDelete.reduce((sum, r) => sum + (r.matches?.length || 0), 0);
+    const bestLoserMatchesToDelete = roundsToDelete.reduce((sum, r) => {
+        return sum + (r.matches?.filter(m => m.type === "best_loser").length || 0);
+    }, 0);
+    
+    // Build confirmation message
+    let confirmMsg = `⚠️ CRITICAL DELETION WARNING ⚠️\n\n`;
+    confirmMsg += `You are about to DELETE:\n`;
+    confirmMsg += `• ${subsequentCount} round${subsequentCount > 1 ? 's' : ''} (${roundsToDelete.map(r => r.name).join(', ')})\n`;
+    confirmMsg += `• ${totalMatchesToDelete} match${totalMatchesToDelete !== 1 ? 'es' : ''} with all scores and results\n`;
+    
+    if (bestLoserMatchesToDelete > 0) {
+        confirmMsg += `• ${bestLoserMatchesToDelete} Best Loser match${bestLoserMatchesToDelete !== 1 ? 'es' : ''}\n`;
+    }
+    
+    confirmMsg += `\nThis action will:\n`;
+    confirmMsg += `1. Permanently delete all listed rounds\n`;
+    confirmMsg += `2. Remove all matches and scores from those rounds\n`;
+    confirmMsg += `3. Remove all Best Loser matches in those rounds\n`;
+    confirmMsg += `4. Cannot be undone (Undo history will be cleared)\n\n`;
+    confirmMsg += `Are you sure you want to proceed?`;
+    
+    // First confirmation
+    const firstConfirm = confirm(confirmMsg);
+    if (!firstConfirm) {
+        showStatus("Round deletion cancelled", "#64748b");
+        return;
+    }
+    
+    // Second confirmation - require typing
+    const verification = prompt(
+        `FINAL CONFIRMATION\n\n` +
+        `This will permanently delete ${subsequentCount} round(s) and ${totalMatchesToDelete} match(es).\n\n` +
+        `Type "CONFIRM REVERT" (all caps, exactly as shown) to proceed:`
+    );
+    
+    if (verification !== "CONFIRM REVERT") {
+        showStatus("Round deletion cancelled - verification failed", "#ef4444");
+        return;
+    }
+    
+    // Perform cascade deletion
+    if (CONFIG.debug) {
+        console.log("=== CASCADE DELETE INITIATED ===");
+        console.log("Deleting rounds from index:", rIdx);
+        console.log("Rounds to delete:", roundsToDelete.map(r => r.name));
+    }
+    
+    // Clear undo/redo history for safety
+    resetHistory();
+    
+    // Delete all rounds from rIdx onwards
+    currentData.rounds = currentData.rounds.slice(0, rIdx);
+    
+    // Unlock the previous round if it exists and is locked
+    // This allows editing and regenerating the next round
+    let unlockedRound = null;
+    let removedBestLoser = false;
+    if (rIdx > 0 && currentData.rounds.length > 0) {
+        const previousRound = currentData.rounds[rIdx - 1];
+        if (previousRound && previousRound.status === "locked") {
+            previousRound.status = "active";
+            unlockedRound = previousRound.name;
+            
+            // Remove Best Loser matches from the unlocked round
+            // Scores might be edited, so Best Loser needs to be recalculated
+            const originalMatchCount = previousRound.matches.length;
+            previousRound.matches = previousRound.matches.filter(m => m.type !== "best_loser");
+            removedBestLoser = previousRound.matches.length < originalMatchCount;
+            
+            if (CONFIG.debug) {
+                console.log(`Unlocked ${previousRound.name} after cascade deletion`);
+                if (removedBestLoser) {
+                    console.log(`Removed Best Loser match from ${previousRound.name} - will need recalculation`);
+                }
+            }
+        }
+    }
+    
+    // If we deleted all rounds, reinitialize with Round 1
+    if (currentData.rounds.length === 0) {
+        currentData.rounds = [{
+            id: 1,
+            name: "Round 1",
+            status: "active",
+            matches: []
+        }];
+    }
+    
+    // Log action (for audit trail)
+    if (!currentData.auditLog) currentData.auditLog = [];
+    currentData.auditLog.push({
+        timestamp: new Date().toISOString(),
+        action: "CASCADE_DELETE_ROUNDS",
+        user: currentUser || "Unknown",
+        details: {
+            deletedRounds: roundsToDelete.map(r => r.name),
+            matchesDeleted: totalMatchesToDelete,
+            bestLoserMatchesDeleted: bestLoserMatchesToDelete,
+            unlockedRound: unlockedRound || null,
+            removedBestLoserFromUnlocked: removedBestLoser
+        }
+    });
+    
+    // Re-render and update
+    renderForm();
+    updateSidebarStats();
+    
+    // Show status message
+    let statusMsg = `🗑️ Deleted ${subsequentCount} round(s) and ${totalMatchesToDelete} match(es).`;
+    if (unlockedRound) {
+        statusMsg += ` ${unlockedRound} unlocked`;
+        if (removedBestLoser) {
+            statusMsg += ` (Best Loser removed)`;
+        }
+        statusMsg += `.`;
+    }
+    statusMsg += ` Save to persist changes.`;
+    
+    showStatus(statusMsg, "#ef4444");
 }
 
 /**
@@ -1519,6 +1727,13 @@ function createBestLoserMatch(rIdx) {
     }
     
     const round = currentData.rounds[rIdx];
+    
+    // Safety check: prevent duplicate Best Loser matches
+    if (hasBestLoserMatch(round)) {
+        alert("This round already has a Best Loser match. Please delete the existing one first (use Undo) or complete it.");
+        return;
+    }
+    
     saveHistorySnapshot();
     
     // Get next match ID
@@ -1667,6 +1882,13 @@ function showPairingUI(numMatches) {
     `;
     
     modal.innerHTML = html;
+    
+    // Initialize dropdown state after rendering (wait for DOM to update)
+    setTimeout(() => {
+        console.log("Initializing pairing dropdowns...");
+        updatePairingDropdowns();
+        console.log("Dropdown initialization complete");
+    }, 100);
 }
 
 function generateTeamOptions() {
@@ -1678,26 +1900,78 @@ function generateTeamOptions() {
 }
 
 function updatePairingDropdowns() {
-    const usedTeams = new Set();
-    
+    // Defensive: always allow selection, never throw
+    const allSelects = Array.from(document.querySelectorAll('[id^="match-"]'));
+    if (!allSelects.length) return;
+
     // Collect all selected teams
-    document.querySelectorAll('[id^="match-"]').forEach(select => {
-        if (select.value) usedTeams.add(select.value);
+    const selectedTeams = new Set();
+    allSelects.forEach(select => {
+        if (select && select.value && select.value !== "") {
+            selectedTeams.add(select.value);
+        }
     });
-    
-    // Update all dropdowns
-    document.querySelectorAll('[id^="match-"]').forEach(select => {
-        const currentValue = select.value;
-        Array.from(select.options).forEach(opt => {
-            if (opt.value === "") {
-                opt.disabled = false;
+
+    // Update each dropdown
+    allSelects.forEach(currentSelect => {
+        if (!currentSelect || !currentSelect.options) return;
+        const currentValue = currentSelect.value;
+        Array.from(currentSelect.options).forEach(option => {
+            if (!option) return;
+            const optionValue = option.value;
+            // Always enable empty option
+            if (optionValue === "" || optionValue === "-- Select Team --") {
+                option.disabled = false;
+                option.style.color = '';
+                option.style.backgroundColor = '';
+                return;
+            }
+            // Disable if selected elsewhere (but not in this dropdown)
+            if (selectedTeams.has(optionValue) && optionValue !== currentValue) {
+                option.disabled = true;
+                option.style.color = '#9ca3af';
+                option.style.backgroundColor = '#f3f4f6';
             } else {
-                opt.disabled = usedTeams.has(opt.value) && opt.value !== currentValue;
+                option.disabled = false;
+                option.style.color = '';
+                option.style.backgroundColor = '';
             }
         });
     });
-    
-    pairingState.usedTeams = usedTeams;
+
+    // Prevent same team in both slots of same match
+    allSelects.forEach(select => {
+        if (!select || !select.id) return;
+        const match = select.id.match(/^match-(\d+)-([ab])$/);
+        if (!match) return;
+        const idx = match[1];
+        const slot = match[2];
+        const selectA = document.getElementById(`match-${idx}-a`);
+        const selectB = document.getElementById(`match-${idx}-b`);
+        if (!selectA || !selectB) return;
+        const teamA = selectA.value;
+        const teamB = selectB.value;
+        if (teamA && teamA !== "") {
+            Array.from(selectB.options).forEach(opt => {
+                if (opt && opt.value === teamA && opt.value !== "") {
+                    opt.disabled = true;
+                    opt.style.color = '#9ca3af';
+                    opt.style.backgroundColor = '#f3f4f6';
+                }
+            });
+        }
+        if (teamB && teamB !== "") {
+            Array.from(selectA.options).forEach(opt => {
+                if (opt && opt.value === teamB && opt.value !== "") {
+                    opt.disabled = true;
+                    opt.style.color = '#9ca3af';
+                    opt.style.backgroundColor = '#f3f4f6';
+                }
+            });
+        }
+    });
+
+    pairingState.usedTeams = selectedTeams;
 }
 
 /**
