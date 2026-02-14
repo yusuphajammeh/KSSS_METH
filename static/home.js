@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     container.innerHTML = activeMatches.map(m => {
+      // Check if this is a best loser match
+      const isBestLoser = m.type === "best_loser";
+      
       // Logic for Points Visibility and Leading/Winner Styling
       let stylePointsA = 'display: none';
       let stylePointsB = 'display: none';
@@ -63,10 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (m.winner === m.teamA.name) classTeamA += ' winner';
       if (m.winner === m.teamB.name) classTeamB += ' winner';
+      
+      // Special styling for best loser matches
+      const matchStyle = isBestLoser ? 'background: #fff9e6; border-left: 4px solid #f59e0b;' : '';
+      const bestLoserBadge = isBestLoser ? '<div style="position: absolute; top: 8px; right: 8px; background: #f59e0b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🏆 BEST LOSER</div>' : '';
 
       // HTML Structure Mirroring styles.css
       return `
-      <div class="match">
+      <div class="match" style="position: relative; ${matchStyle}">
+        ${bestLoserBadge}
         <div class="card-tag">GRADE ${m.gradeLevel}</div>
         
         <div class="match-schedule">

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test - Round Management</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .result { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Tournament Logic Debug Test</h1>
+    <p>This page tests the qualification logic with Grade 12 sample data.</p>
+    
+    <div id="results"></div>
+
+    <script>
+        // Sample data from Grade 12 Round 1
+        const testRound = {
+            "id": 1,
+            "name": "Round 1",
+            "matches": [
+                {
+                    "id": 1,
+                    "teamA": { "name": "Zainab 1", "points": 17 },
+                    "teamB": { "name": "Fatimah 1", "points": 0 },
+                    "winner": "Zainab 1"
+                },
+                {
+                    "id": 2,
+                    "teamA": { "name": "Ousman", "points": null },
+                    "teamB": { "name": "Roheyah", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 3,
+                    "teamA": { "name": "Hamza", "points": null },
+                    "teamB": { "name": "Zainab 2", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 4,
+                    "teamA": { "name": "Saffiah 1", "points": null },
+                    "teamB": { "name": "Naffisah 2", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 5,
+                    "teamA": { "name": "Umar 2", "points": null },
+                    "teamB": { "name": "Fatimah 2", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 6,
+                    "teamA": { "name": "Umar 1", "points": null },
+                    "teamB": { "name": "Aisha 1", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 7,
+                    "teamA": { "name": "Saffiah 2", "points": null },
+                    "teamB": { "name": "Ebrima", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 8,
+                    "teamA": { "name": "Naffisah 1", "points": null },
+                    "teamB": { "name": "Aisha 2", "points": null },
+                    "winner": null
+                },
+                {
+                    "id": 9,
+                    "teamA": { "name": "Bilal / Khadijah", "points": null },
+                    "teamB": { "name": "Ali", "points": null },
+                    "winner": null
+                }
+            ]
+        };
+
+        // Test function from admin.js
+        function getQualifiedTeams(round) {
+            if (!round || !round.matches) return [];
+            
+            const winners = [];
+            round.matches.forEach(m => {
+                if (m.winner !== null && m.winner !== undefined && m.winner !== "") {
+                    winners.push(m.winner);
+                }
+            });
+            
+            return winners;
+        }
+
+        // Run tests
+        const resultsDiv = document.getElementById('results');
+        
+        // Test 1: Total matches
+        const totalMatches = testRound.matches.length;
+        resultsDiv.innerHTML += `<div class="result ${totalMatches === 9 ? 'success' : 'error'}">
+            <strong>Test 1: Total Matches</strong><br>
+            Expected: 9<br>
+            Got: ${totalMatches}<br>
+            Status: ${totalMatches === 9 ? '✅ PASS' : '❌ FAIL'}
+        </div>`;
+
+        // Test 2: Completed matches
+        const completedMatches = testRound.matches.filter(m => m.winner !== null && m.winner !== undefined && m.winner !== "").length;
+        resultsDiv.innerHTML += `<div class="result ${completedMatches === 1 ? 'success' : 'error'}">
+            <strong>Test 2: Completed Matches</strong><br>
+            Expected: 1<br>
+            Got: ${completedMatches}<br>
+            Status: ${completedMatches === 1 ? '✅ PASS' : '❌ FAIL'}
+        </div>`;
+
+        // Test 3: Qualified teams
+        const qualified = getQualifiedTeams(testRound);
+        resultsDiv.innerHTML += `<div class="result ${qualified.length === 1 ? 'success' : 'error'}">
+            <strong>Test 3: Qualified Teams</strong><br>
+            Expected: 1 (["Zainab 1"])<br>
+            Got: ${qualified.length} (${JSON.stringify(qualified)})<br>
+            Status: ${qualified.length === 1 && qualified[0] === "Zainab 1" ? '✅ PASS' : '❌ FAIL'}
+        </div>`;
+
+        // Test 4: Winner detection for each match
+        let matchDetails = '<div class="result"><strong>Test 4: Individual Match Analysis</strong><br><br>';
+        testRound.matches.forEach((m, idx) => {
+            const hasWinner = m.winner !== null && m.winner !== undefined && m.winner !== "";
+            matchDetails += `Match ${m.id}: winner="${m.winner}" → ${hasWinner ? '✅' : '❌'} Counted<br>`;
+        });
+        matchDetails += '</div>';
+        resultsDiv.innerHTML += matchDetails;
+
+        // Summary
+        const allPass = totalMatches === 9 && completedMatches === 1 && qualified.length === 1;
+        resultsDiv.innerHTML += `<div class="result ${allPass ? 'success' : 'error'}" style="font-size: 20px; font-weight: bold;">
+            ${allPass ? '🎉 ALL TESTS PASSED! Logic is working correctly.' : '⚠️ SOME TESTS FAILED! Check the logic.'}
+        </div>`;
+
+        console.log("Test Round Data:", testRound);
+        console.log("Qualified Teams:", qualified);
+        console.log("Completed Matches:", completedMatches);
+    </script>
+</body>
+</html>

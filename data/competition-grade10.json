@@ -71,19 +71,6 @@
           "winner": null
         }
       ]
-    },
-    {
-      "id": 2,
-      "name": "Best Loser Match",
-      "matches": [
-        {
-          "id": 10,
-          "schedule": { "date": "Pending", "time": "TBD", "location": "Maths Lab" },
-          "teamA": { "name": "TBD (Round 1 Loser)", "points": null },
-          "teamB": { "name": "TBD (Round 1 Loser)", "points": null },
-          "winner": null
-        }
-      ]
     }
   ]
 }

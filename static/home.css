@@ -33,6 +33,42 @@ body {
     object-fit: contain;
 }
 
+/* Logo Fallback */
+.logo-placeholder {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 24px;
+    color: white;
+    letter-spacing: -1px;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+    position: relative;
+}
+
+.logo-placeholder::before {
+    content: "KSSS";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.logo-placeholder::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    box-sizing: border-box;
+}
+
 .school-name {
     font-size: 20px;
     font-weight: 700;

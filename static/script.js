@@ -42,6 +42,22 @@ fetch(jsonFile)
       sortedMatches.forEach(match => {
         const matchDiv = document.createElement("div");
         matchDiv.className = "match";
+        
+        // Add special styling for best loser matches
+        const isBestLoser = match.type === "best_loser";
+        if (isBestLoser) {
+          matchDiv.style.background = "#fff9e6";
+          matchDiv.style.borderLeft = "4px solid #f59e0b";
+          matchDiv.style.position = "relative";
+        }
+        
+        // Add best loser badge
+        if (isBestLoser) {
+          const badge = document.createElement("div");
+          badge.style.cssText = "position: absolute; top: 8px; right: 8px; background: #f59e0b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;";
+          badge.textContent = "🏆 BEST LOSER PLAYOFF";
+          matchDiv.appendChild(badge);
+        }
 
         // Schedule header
         if (match.schedule) {
