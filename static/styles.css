@@ -1,13 +1,55 @@
+:root {
+  --bg-gradient-start: #f0f4f8;
+  --bg-gradient-end: #e2e8f0;
+  --text-primary: #1e293b;
+  --round-title: #1e40af;
+  --round-border: #3b82f6;
+  --card-bg: #ffffff;
+  --card-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  --muted-bg: #f1f5f9;
+  --muted-text: #475569;
+  --winner-border: #22c55e;
+  --winner-bg: #dcfce7;
+  --leading-text: #065f46;
+  --schedule-text: #1e293b;
+  --schedule-date-bg: #e0f2fe;
+  --schedule-time-bg: #fef3c7;
+  --schedule-location-bg: #e0f7fa;
+  --nav-btn-bg: #3b82f6;
+  --nav-btn-hover: #1e40af;
+}
+
+[data-theme="dark"] {
+  --bg-gradient-start: #0f172a;
+  --bg-gradient-end: #111827;
+  --text-primary: #e2e8f0;
+  --round-title: #93c5fd;
+  --round-border: #60a5fa;
+  --card-bg: #1f2937;
+  --card-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  --muted-bg: #334155;
+  --muted-text: #cbd5e1;
+  --winner-border: #22c55e;
+  --winner-bg: #14532d;
+  --leading-text: #86efac;
+  --schedule-text: #e2e8f0;
+  --schedule-date-bg: #1e3a8a;
+  --schedule-time-bg: #713f12;
+  --schedule-location-bg: #134e4a;
+  --nav-btn-bg: #2563eb;
+  --nav-btn-hover: #1d4ed8;
+}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #f0f4f8, #e2e8f0);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
   padding: 30px;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 50px;
-  color: #1e293b;
+  color: var(--text-primary);
   font-size: 28px;
 }
 
@@ -19,20 +61,20 @@ h1 {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 20px;
-  border-left: 6px solid #3b82f6;
+  border-left: 6px solid var(--round-border);
   padding-left: 12px;
-  color: #1e40af;
+  color: var(--round-title);
 }
 
 .match {
   display: flex;
   flex-direction: column; /* Stack schedule on top, teams below */
   align-items: center;
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 16px 20px;
   margin-bottom: 14px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--card-shadow);
   position: relative;
   transition: transform 0.2s;
 }
@@ -76,8 +118,8 @@ h1 {
   font-size: 14px;
   padding: 4px 10px;
   border-radius: 6px;
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--muted-bg);
+  color: var(--muted-text);
   min-width: 50px;
   text-align: center;
   display: none;
@@ -88,18 +130,18 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   font-weight: bold;
-  color: #475569;
+  color: var(--muted-text);
   z-index: 2;
 }
 
 .leading {
   font-weight: 600;
-  color: #065f46;
+  color: var(--leading-text);
 }
 
 .winner {
-  border: 2px solid #22c55e;
-  background: #dcfce7;
+  border: 2px solid var(--winner-border);
+  background: var(--winner-bg);
   border-radius: 8px;
   padding: 4px 6px;
 }
@@ -117,8 +159,8 @@ h1 {
 }
 
 .match-schedule div {
-  background-color: #f1f5f9; /* subtle distinguishing background */
-  color: #1e293b;            /* text color */
+  background-color: var(--muted-bg); /* subtle distinguishing background */
+  color: var(--schedule-text);            /* text color */
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 13px;
@@ -129,13 +171,17 @@ h1 {
 /* Navigation container */
 .back-nav {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 /* The button styling */
 .back-home-btn {
   display: inline-block;
   padding: 8px 16px;
-  background-color: #3b82f6; /* Matching your theme color */
+  background-color: var(--nav-btn-bg); /* Matching your theme color */
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -145,7 +191,26 @@ h1 {
 }
 
 .back-home-btn:hover {
-  background-color: #1e40af;
+  background-color: var(--nav-btn-hover);
+}
+
+.theme-toggle {
+  border: none;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  font-size: 18px;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
 }
 
 /* Optional: different colors for each */
@@ -154,12 +219,17 @@ h1 {
 .match-schedule .schedule-time { background-color: #fef3c7; }     /* light yellow */
 .match-schedule .schedule-location { background-color: #e0f7fa; } /* light teal */ /* light teal */
 
+.match-schedule .schedule-date { background-color: var(--schedule-date-bg); }
+.match-schedule .schedule-time { background-color: var(--schedule-time-bg); }
+.match-schedule .schedule-location { background-color: var(--schedule-location-bg); }
+
 /* =========================
    Mobile Optimization
    ========================= */
 @media (max-width: 768px) {
   body { padding: 16px; }
   h1 { font-size: 22px; margin-bottom: 30px; }
+  .back-nav { align-items: center; }
   .round-title { font-size: 18px; margin-bottom: 16px; }
   .match { padding: 14px; }
   .team { flex: 1; min-width: 0; }

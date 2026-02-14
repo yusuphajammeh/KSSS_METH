@@ -799,7 +799,7 @@
     <div class="header-card">
         <div class="admin-status">
             <div class="brand-wrap">
-                <img src="static/images/logo.png" alt="KSSS Logo" class="brand-logo" onerror="this.style.display='none'; const fallback=this.nextElementSibling; if(fallback) fallback.style.display='flex';">
+                <img src="static/images/logo.png" alt="KSSS Logo" class="brand-logo" onerror="console.warn('⚠️ Logo missing: Place logo.png in static/images/ folder'); this.style.display='none'; const fallback=this.nextElementSibling; if(fallback) fallback.style.display='flex';">
                 <div class="brand-fallback">KSSS</div>
                 <div class="brand-title">
                     <span style="font-size: 28px;">🎯</span>
@@ -807,7 +807,7 @@
                 </div>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
-                <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle dark mode" aria-label="Toggle dark mode">
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle between dark and light theme" aria-label="Toggle between dark and light theme">
                     <span id="theme-icon">🌙</span>
                 </button>
                 <div class="system-badge">v2.1.0</div>
@@ -912,10 +912,10 @@
                         <button id="redo-btn" onclick="redoChange()" disabled style="width: auto; padding: 10px 20px; font-size: 14px;" title="Redo last undone change (Ctrl+Y)" aria-label="Redo last undone change">
                             ↪️ Redo
                         </button>
-                        <button onclick="exportToCSV()" style="width: auto; padding: 10px 20px; font-size: 14px; background: #16a34a;" title="Export tournament data as CSV file" aria-label="Export tournament data as CSV">
+                        <button onclick="exportToCSV()" style="width: auto; padding: 10px 20px; font-size: 14px; background: #16a34a;" title="Export tournament data as CSV file (Ctrl+E)" aria-label="Export tournament data as CSV">
                             📊 Export CSV
                         </button>
-                        <button onclick="exportToPDF()" style="width: auto; padding: 10px 20px; font-size: 14px; background: #dc2626;" title="Generate PDF report of tournament" aria-label="Generate PDF report">
+                        <button onclick="exportToPDF()" style="width: auto; padding: 10px 20px; font-size: 14px; background: #dc2626;" title="Generate PDF report of tournament (Ctrl+P)" aria-label="Generate PDF report">
                             📄 Export PDF
                         </button>
                         <button onclick="loadMatches(true)" style="width: auto; padding: 10px 20px; font-size: 14px;" title="Force refresh from GitHub (bypasses cache)" aria-label="Force refresh data from GitHub">

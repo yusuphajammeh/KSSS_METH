@@ -1,6 +1,39 @@
-const CONFIG = {
+const DEFAULT_CONFIG = {
     owner: "KSSS-MTC",
-    repo: "KSSS_MATH_QUIZ_COMPETITION",
+    repo: "KSSS_MATH_QUIZ_COMPETITION"
+};
+
+function resolveRepositoryConfig() {
+    const params = new URLSearchParams(window.location.search);
+    const ownerFromQuery = (params.get("owner") || "").trim();
+    const repoFromQuery = (params.get("repo") || "").trim();
+
+    let ownerFromStorage = "";
+    let repoFromStorage = "";
+
+    try {
+        ownerFromStorage = (localStorage.getItem("ksss_repo_owner") || "").trim();
+        repoFromStorage = (localStorage.getItem("ksss_repo_name") || "").trim();
+
+        if (ownerFromQuery && repoFromQuery) {
+            localStorage.setItem("ksss_repo_owner", ownerFromQuery);
+            localStorage.setItem("ksss_repo_name", repoFromQuery);
+        }
+    } catch {
+        // localStorage may be unavailable in some environments
+    }
+
+    return {
+        owner: ownerFromQuery || ownerFromStorage || DEFAULT_CONFIG.owner,
+        repo: repoFromQuery || repoFromStorage || DEFAULT_CONFIG.repo
+    };
+}
+
+const repositoryConfig = resolveRepositoryConfig();
+
+const CONFIG = {
+    owner: repositoryConfig.owner,
+    repo: repositoryConfig.repo,
     version: "2.1.0", // Version tracking for cache busting
     debug: false // Set to true to enable debug logging
 };
@@ -13,12 +46,15 @@ const CONSTANTS = {
     MAX_RETRY_DELAY: 5000, // ms
     
     // Cache Settings
-    CACHE_DURATION: 5 * 60 * 1000, // 5 minutes in ms
+    CACHE_DURATION: 15 * 60 * 1000, // 15 minutes in ms (reduced API calls)
     CACHE_KEY_PREFIX: "ksss_cache_",
     
     // Pagination Settings
     MATCHES_PER_PAGE: 20,
     MAX_HISTORY_ENTRIES: 50,
+    
+    // UI Display
+    MAX_HOME_MATCHES: 6, // Number of matches shown on homepage
     
     // UI Timeouts
     SUCCESS_MESSAGE_DURATION: 4000, // ms
@@ -608,11 +644,13 @@ window.addEventListener("DOMContentLoaded", () => {
         showStatus("Session restored", "#16a34a");
     }
 
-    // Keyboard shortcuts: Ctrl+Z (Undo), Ctrl+Y / Ctrl+Shift+Z (Redo)
+    // Keyboard shortcuts: Ctrl+Z (Undo), Ctrl+Y / Ctrl+Shift+Z (Redo), Ctrl+E (CSV), Ctrl+P (PDF)
     document.addEventListener("keydown", (event) => {
         const key = event.key.toLowerCase();
         const isUndo = (event.ctrlKey || event.metaKey) && key === "z" && !event.shiftKey;
         const isRedo = (event.ctrlKey || event.metaKey) && (key === "y" || (key === "z" && event.shiftKey));
+        const isExportCSV = (event.ctrlKey || event.metaKey) && key === "e" && !event.shiftKey;
+        const isExportPDF = (event.ctrlKey || event.metaKey) && key === "p" && !event.shiftKey;
 
         if (isUndo) {
             event.preventDefault();
@@ -620,6 +658,12 @@ window.addEventListener("DOMContentLoaded", () => {
         } else if (isRedo) {
             event.preventDefault();
             redoChange();
+        } else if (isExportCSV) {
+            event.preventDefault();
+            if (currentData) exportToCSV();
+        } else if (isExportPDF) {
+            event.preventDefault();
+            if (currentData) exportToPDF();
         }
     });
 });
@@ -700,7 +744,7 @@ async function loadMatches(forceRefresh = false) {
         showStatus("✅ Matches Loaded Successfully", "#16a34a");
     } catch (e) {
         document.getElementById("loading-overlay").classList.add("hidden");
-        console.error(e);
+        if (CONFIG.debug) console.error("Load Error:", e);
         showStatus(`Error: ${e.message}`, "#ef4444");
         
         // Show user-friendly error alert
@@ -796,11 +840,12 @@ function renderForm() {
                             <label>${m.teamA.name}</label>
                             <input type="number"
                                 value="${m.teamA.points ?? ""}"
-                                min="0"
-                                max="100"
+                                min="${CONSTANTS.MIN_SCORE}"
+                                max="${CONSTANTS.MAX_SCORE}"
                                 step="1"
-                                placeholder="0-100"
-                                oninput="updateScores(${rIdx},${mIdx},'teamA',this.value)">
+                                placeholder="${CONSTANTS.MIN_SCORE}-${CONSTANTS.MAX_SCORE} points"
+                                oninput="updateScores(${rIdx},${mIdx},'teamA',this.value)"
+                                aria-label="Score for ${m.teamA.name}">
                         </div>
 
                         <div class="vs-label">VS</div>
@@ -809,11 +854,12 @@ function renderForm() {
                             <label>${m.teamB.name}</label>
                             <input type="number"
                                 value="${m.teamB.points ?? ""}"
-                                min="0"
-                                max="100"
+                                min="${CONSTANTS.MIN_SCORE}"
+                                max="${CONSTANTS.MAX_SCORE}"
                                 step="1"
-                                placeholder="0-100"
-                                oninput="updateScores(${rIdx},${mIdx},'teamB',this.value)">
+                                placeholder="${CONSTANTS.MIN_SCORE}-${CONSTANTS.MAX_SCORE} points"
+                                oninput="updateScores(${rIdx},${mIdx},'teamB',this.value)"
+                                aria-label="Score for ${m.teamB.name}">
                         </div>
                     </div>
 
