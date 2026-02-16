@@ -306,16 +306,12 @@ const AdminSecurity = (() => {
         if (CONFIG.debug) console.log("🔒 Critical functions frozen.");
     }
 
-    const instance = Object.freeze({
+    return Object.freeze({
         login,
         logout,
         verifySession,
         getRole: () => role
     });
-
-    // Fix: Explicitly attach to window because 'const' doesn't do it automatically
-    window.AdminSecurity = instance;
-    return instance;
 })();
 
 // Expose hooks for HTML
@@ -1010,7 +1006,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Keyboard shortcuts: Ctrl+Z (Undo), Ctrl+Y / Ctrl+Shift+Z (Redo), Ctrl+E (CSV), Ctrl+P (PDF)
     document.addEventListener("keydown", (event) => {
-        const key = (event.key || "").toLowerCase();
+        const key = event.key.toLowerCase();
         const isUndo = (event.ctrlKey || event.metaKey) && key === "z" && !event.shiftKey;
         const isRedo = (event.ctrlKey || event.metaKey) && (key === "y" || (key === "z" && event.shiftKey));
         const isExportCSV = (event.ctrlKey || event.metaKey) && key === "e" && !event.shiftKey;
@@ -2969,171 +2965,3 @@ window.addEventListener('beforeunload', () => {
     // Strictly clear token on tab close or refresh to prevents persistence
     sessionStorage.removeItem("githubToken");
 });
-
-// Stub function for showLoginModal (referenced in AdminSecurity.verifySession but not defined)
-// In this implementation, login section is visible by default in HTML, so this is a no-op
-function showLoginModal() {
-    // Login section is already visible by default in admin.html
-    // This stub prevents ReferenceError in AdminSecurity.verifySession (line 254)
-    if (CONFIG.debug) console.log("showLoginModal called - login section should be visible");
-}
-
-// ===============================
-// KSSS_UI_HOOKS Security Layer (Layer 2)
-// ===============================
-// Wraps UI-callable functions with re-entrance protection
-// Preserves AdminSecurity (Layer 1) - does not replace it
-(function () {
-    /**
-     * Secure wrapper: prevents re-entrant calls (double-click protection)
-     * Locks function execution with async-safe flag
-     * Provides user feedback during execution
-     */
-    function secureHook(fn) {
-        let locked = false;
-        return async function (...args) {
-            if (locked) {
-                showStatus("⏳ Action is already running. Please wait...", "#f59e0b");
-                return;
-            }
-            locked = true;
-            try {
-                return await fn.apply(this, args);
-            } finally {
-                locked = false;
-            }
-        };
-    }
-
-    // List of function names to wrap (if they exist)
-    // This is safer than direct object literal references which throw ReferenceError
-    const functionNames = [
-        // Core Data Operations
-        'loadMatches',
-        'saveToGitHub',
-
-        // Team Swap System (internally uses AdminSecurity.getRole())
-        'confirmTeamSwap',
-        'cancelTeamSwap',
-        'unlockTeam',
-        'relockTeam',
-
-        // History Management
-        'undoChange',
-        'redoChange',
-
-        // Export Functions
-        'exportToCSV',
-        'exportToPDF',
-
-        // Filtering & Pagination
-        'filterMatches',
-        'clearFilters',
-        'changePage',
-
-        // Team Switch Mode (internally protected by AdminSecurity)
-        'activateTeamSwitchMode',
-        'exitTeamSwitchMode',
-
-        // Structural Actions & Logs (may not exist in working version)
-        'showStructuralActionLog',
-        'displayStructuralLog',
-
-        // Round Management (internally protected by AdminSecurity)
-        'cascadeDeleteRound',
-        'endTournament',
-        'showBestLoserCreator',
-        'showRoundGenerator',
-        'createBestLoserMatch',
-        'startPairing',
-        'finalizePairing',
-
-        // Modal Management
-        'closeBestLoserModal',
-        'closeRoundGenModal',
-        'closeStructuralLogModal'
-    ];
-
-    // Safely collect functions that exist in global scope
-    const hooks = {};
-    const missingFunctions = [];
-
-    functionNames.forEach(name => {
-        // Use indirect eval or window lookup to avoid ReferenceError
-        try {
-            const fn = window[name];
-            if (typeof fn === 'function') {
-                hooks[name] = fn;
-            } else {
-                missingFunctions.push(name);
-            }
-        } catch (e) {
-            missingFunctions.push(name);
-            if (CONFIG.debug) console.warn(`⚠️ KSSS_UI_HOOKS: Could not access ${name}:`, e.message);
-        }
-    });
-
-    // Log missing functions (informational, not an error)
-    if (missingFunctions.length > 0 && CONFIG.debug) {
-        console.info(`ℹ️ KSSS_UI_HOOKS: ${missingFunctions.length} functions not found (this is OK):`, missingFunctions);
-    }
-
-    // Wrap all found functions with secureHook
-    const wrapped = {};
-    for (const [name, fn] of Object.entries(hooks)) {
-        wrapped[name] = secureHook(fn);
-    }
-
-    // ALWAYS expose the wrapped API (even if empty), then freeze
-    Object.freeze(wrapped);
-    window.KSSS_UI_HOOKS = wrapped;
-
-    // Log successful initialization
-    const count = Object.keys(wrapped).length;
-    console.log(`🔒 KSSS_UI_HOOKS initialized with ${count} protected function${count !== 1 ? 's' : ''}`);
-
-    if (CONFIG.debug) {
-        console.log("✅ AdminSecurity Layer 1: Role verification, tamper detection");
-        console.log("✅ KSSS_UI_HOOKS Layer 2: Re-entrance protection, frozen API");
-        console.log("Protected functions:", Object.keys(wrapped).sort());
-    }
-})();
-
-// ===============================
-// CRITICAL FIX: GitHub Authentication Patch
-// ===============================
-// Override fetchWithRetry to support Fine-Grained PATs (Bearer header)
-// This fixes 401 errors without modifying legacy loadMatches/saveToGitHub code
-(function () {
-    // Wait for main script to define fetchWithRetry
-    const originalFetchWithRetry = window.fetchWithRetry;
-
-    if (typeof originalFetchWithRetry === 'function') {
-        window.fetchWithRetry = async function (url, options = {}, ...args) {
-            try {
-                // Check for Authorization header using "token" prefix
-                if (options && options.headers && options.headers.Authorization) {
-                    const auth = options.headers.Authorization;
-
-                    if (auth.startsWith("token ")) {
-                        const tokenVal = auth.substring(6).trim();
-
-                        // Heuristic: Fine-grained PATs start with 'github_pat_' or 'gith' and are long (>50 chars)
-                        // Classic PATs are usually shorter (~40 chars) and verify with 'ghp_'
-                        // Fine-grained tokens REQUIRE 'Bearer' scheme. Classic tokens support both.
-                        if (tokenVal.startsWith("gith") || tokenVal.length > 50) {
-                            if (CONFIG?.debug) console.log("🔐 Auth Patch: Switching 'token' to 'Bearer' for Fine-Grained PAT");
-                            options.headers.Authorization = `Bearer ${tokenVal}`;
-                        }
-                    }
-                }
-            } catch (e) {
-                // Ignore any internal patch errors to ensure request proceeds
-                console.warn("Auth patch warning:", e);
-            }
-
-            return originalFetchWithRetry(url, options, ...args);
-        };
-        if (CONFIG?.debug) console.log("✅ Authenticated Fetch Patch applied");
-    }
-})();
