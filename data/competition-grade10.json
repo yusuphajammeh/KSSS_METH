@@ -274,6 +274,24 @@
             "points": 44
           },
           "winner": "Aisha 1 / Roheyah"
+        },
+        {
+          "id": 6,
+          "type": "best_loser",
+          "schedule": {
+            "date": "Pending",
+            "time": "TBD",
+            "location": "Maths Lab"
+          },
+          "teamA": {
+            "name": "Ali",
+            "points": null
+          },
+          "teamB": {
+            "name": "Roheyah",
+            "points": null
+          },
+          "winner": null
         }
       ]
     }
