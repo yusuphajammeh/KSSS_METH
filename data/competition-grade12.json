@@ -14,8 +14,14 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Zainab 1", "points": 17 },
-          "teamB": { "name": "Fatimah 1", "points": 0 },
+          "teamA": {
+            "name": "Zainab 1",
+            "points": 17
+          },
+          "teamB": {
+            "name": "Fatimah 1",
+            "points": 0
+          },
           "winner": "Zainab 1"
         },
         {
@@ -25,8 +31,14 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Ousman", "points": null },
-          "teamB": { "name": "Roheyah", "points": null },
+          "teamA": {
+            "name": "Ousman",
+            "points": 12
+          },
+          "teamB": {
+            "name": "Roheyah",
+            "points": 12
+          },
           "winner": null
         },
         {
@@ -36,9 +48,15 @@
             "time": "Pending",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Hamza", "points": null },
-          "teamB": { "name": "Zainab 2", "points": null },
-          "winner": null
+          "teamA": {
+            "name": "Hamza",
+            "points": 13
+          },
+          "teamB": {
+            "name": "Zainab 2",
+            "points": 12
+          },
+          "winner": "Hamza"
         },
         {
           "id": 4,
@@ -47,8 +65,14 @@
             "time": "4:50 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Saffiah 1", "points": null },
-          "teamB": { "name": "Naffisah 2", "points": null },
+          "teamA": {
+            "name": "Saffiah 1",
+            "points": 12
+          },
+          "teamB": {
+            "name": "Naffisah 2",
+            "points": 12
+          },
           "winner": null
         },
         {
@@ -58,8 +82,14 @@
             "time": "4:50 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Umar 2", "points": null },
-          "teamB": { "name": "Fatimah 2", "points": null },
+          "teamA": {
+            "name": "Umar 2",
+            "points": 12
+          },
+          "teamB": {
+            "name": "Fatimah 2",
+            "points": 12
+          },
           "winner": null
         },
         {
@@ -69,9 +99,15 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Umar 1", "points": null },
-          "teamB": { "name": "Aisha 1", "points": null },
-          "winner": null
+          "teamA": {
+            "name": "Umar 1",
+            "points": 23
+          },
+          "teamB": {
+            "name": "Aisha 1",
+            "points": 13
+          },
+          "winner": "Umar 1"
         },
         {
           "id": 7,
@@ -80,9 +116,15 @@
             "time": "4:50 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Saffiah 2", "points": null },
-          "teamB": { "name": "Ebrima", "points": null },
-          "winner": null
+          "teamA": {
+            "name": "Saffiah 2",
+            "points": 3
+          },
+          "teamB": {
+            "name": "Ebrima",
+            "points": 0
+          },
+          "winner": "Saffiah 2"
         },
         {
           "id": 8,
@@ -91,8 +133,14 @@
             "time": "Pending",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Naffisah 1", "points": null },
-          "teamB": { "name": "Aisha 2", "points": null },
+          "teamA": {
+            "name": "Naffisah 1",
+            "points": 3
+          },
+          "teamB": {
+            "name": "Aisha 2",
+            "points": 3
+          },
           "winner": null
         },
         {
@@ -102,9 +150,15 @@
             "time": "12:15 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Bilal / Khadijah", "points": null },
-          "teamB": { "name": "Ali", "points": null },
-          "winner": null
+          "teamA": {
+            "name": "Bilal / Khadijah",
+            "points": 8
+          },
+          "teamB": {
+            "name": "Ali",
+            "points": 3
+          },
+          "winner": "Bilal / Khadijah"
         }
       ]
     }
