@@ -151,11 +151,11 @@
             "location": "Maths Lab"
           },
           "teamA": {
-            "name": "Fatimah 1",
+            "name": "Saffiah 2",
             "points": null
           },
           "teamB": {
-            "name": "Saffiah 2",
+            "name": "Fatimah 1",
             "points": null
           },
           "winner": null
@@ -280,6 +280,26 @@
         "teamB": {
           "name": "Zainab 1",
           "match": 1,
+          "side": "B"
+        }
+      }
+    },
+    {
+      "action": "Team Swap",
+      "timestamp": "2026-02-18T13:53:10.934Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "timestamp": "2026-02-18T13:53:10.934Z",
+        "round": "Round 1",
+        "teamA": {
+          "name": "Fatimah 1",
+          "match": 9,
+          "side": "A"
+        },
+        "teamB": {
+          "name": "Saffiah 2",
+          "match": 9,
           "side": "B"
         }
       }
