@@ -338,6 +338,46 @@
           "side": "B"
         }
       }
+    },
+    {
+      "action": "Team Swap",
+      "timestamp": "2026-02-19T00:25:53.775Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "timestamp": "2026-02-19T00:25:53.775Z",
+        "round": "Round 2",
+        "teamA": {
+          "name": "Ousman",
+          "match": 5,
+          "side": "A"
+        },
+        "teamB": {
+          "name": "Naffisah 1",
+          "match": 4,
+          "side": "B"
+        }
+      }
+    },
+    {
+      "action": "Team Swap",
+      "timestamp": "2026-02-19T00:25:59.869Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "timestamp": "2026-02-19T00:25:59.869Z",
+        "round": "Round 2",
+        "teamA": {
+          "name": "Naffisah 1",
+          "match": 5,
+          "side": "A"
+        },
+        "teamB": {
+          "name": "Ousman",
+          "match": 4,
+          "side": "B"
+        }
+      }
     }
   ],
   "auditLog": [
