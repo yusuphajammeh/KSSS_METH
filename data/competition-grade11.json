@@ -170,13 +170,13 @@
           },
           "teamA": {
             "name": "Aisha 1 / Khadijah",
-            "points": null
+            "points": 2
           },
           "teamB": {
             "name": "Umar 1 / Bilal",
-            "points": null
+            "points": 4
           },
-          "winner": null
+          "winner": "Umar 1 / Bilal"
         }
       ]
     }
