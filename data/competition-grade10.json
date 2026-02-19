@@ -19,7 +19,7 @@
             "points": null
           },
           "teamB": {
-            "name": "Zainab 1",
+            "name": "Ebrima",
             "points": null
           },
           "winner": null
@@ -32,7 +32,7 @@
             "location": "Maths Lab"
           },
           "teamA": {
-            "name": "Ebrima",
+            "name": "Zainab 1",
             "points": null
           },
           "teamB": {
@@ -489,6 +489,26 @@
         },
         "teamB": {
           "name": "Umar 2 / Umar 3",
+          "match": 1,
+          "side": "B"
+        }
+      }
+    },
+    {
+      "action": "Team Swap",
+      "timestamp": "2026-02-19T14:38:59.842Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "timestamp": "2026-02-19T14:38:59.842Z",
+        "round": "Round 1",
+        "teamA": {
+          "name": "Ebrima",
+          "match": 2,
+          "side": "A"
+        },
+        "teamB": {
+          "name": "Zainab 1",
           "match": 1,
           "side": "B"
         }
