@@ -377,7 +377,7 @@
     {
       "id": 4,
       "name": "Round 4",
-      "status": "locked",
+      "status": "active",
       "matches": [
         {
           "id": 1,
@@ -416,31 +416,6 @@
           "winner": "Fatimah 2"
         }
       ]
-    },
-    {
-      "id": 5,
-      "name": "Round 5",
-      "status": "active",
-      "matches": [
-        {
-          "id": 1,
-          "type": "normal",
-          "schedule": {
-            "date": "Pending",
-            "time": "TBD",
-            "location": "Maths Lab"
-          },
-          "teamA": {
-            "name": "Fatimah 2",
-            "points": 55
-          },
-          "teamB": {
-            "name": "Umar 2",
-            "points": 88
-          },
-          "winner": "Umar 2"
-        }
-      ]
     }
   ],
   "structuralLog": [
@@ -452,6 +427,36 @@
         "admin": "Y-JAMMEH",
         "roundIndex": 1,
         "timestamp": "2026-02-19T03:29:41.935Z"
+      }
+    },
+    {
+      "action": "End Tournament",
+      "timestamp": "2026-02-19T14:52:16.849Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 4,
+        "timestamp": "2026-02-19T14:52:16.849Z"
+      }
+    },
+    {
+      "action": "Unlock Final Round",
+      "timestamp": "2026-02-19T14:54:23.752Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 4,
+        "roundName": "Round 5"
+      }
+    },
+    {
+      "action": "Cascade Delete Round",
+      "timestamp": "2026-02-19T15:01:12.118Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 4,
+        "timestamp": "2026-02-19T15:01:12.118Z"
       }
     }
   ],
@@ -468,6 +473,20 @@
         "bestLoserMatchesDeleted": 0,
         "unlockedRound": "Round 1",
         "removedBestLoserFromUnlocked": true
+      }
+    },
+    {
+      "timestamp": "2026-02-19T15:02:08.648Z",
+      "action": "CASCADE_DELETE_ROUNDS",
+      "user": "Y-JAMMEH",
+      "details": {
+        "deletedRounds": [
+          "Round 5"
+        ],
+        "matchesDeleted": 1,
+        "bestLoserMatchesDeleted": 0,
+        "unlockedRound": "Round 4",
+        "removedBestLoserFromUnlocked": false
       }
     }
   ]
