@@ -183,7 +183,7 @@
     {
       "id": 2,
       "name": "Round 2",
-      "status": "active",
+      "status": "locked",
       "matches": [
         {
           "id": 1,
@@ -292,6 +292,67 @@
             "points": 13
           },
           "winner": "Naffisah 2"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Round 3",
+      "status": "active",
+      "matches": [
+        {
+          "id": 1,
+          "type": "normal",
+          "schedule": {
+            "date": "Pending",
+            "time": "TBD",
+            "location": "Maths Lab"
+          },
+          "teamA": {
+            "name": "Saffiah 2",
+            "points": null
+          },
+          "teamB": {
+            "name": "Naffisah 2",
+            "points": null
+          },
+          "winner": null
+        },
+        {
+          "id": 2,
+          "type": "normal",
+          "schedule": {
+            "date": "Pending",
+            "time": "TBD",
+            "location": "Maths Lab"
+          },
+          "teamA": {
+            "name": "Ousman",
+            "points": null
+          },
+          "teamB": {
+            "name": "Umar 2",
+            "points": null
+          },
+          "winner": null
+        },
+        {
+          "id": 3,
+          "type": "normal",
+          "schedule": {
+            "date": "Pending",
+            "time": "TBD",
+            "location": "Maths Lab"
+          },
+          "teamA": {
+            "name": "Zainab 1",
+            "points": null
+          },
+          "teamB": {
+            "name": "Fatimah 2",
+            "points": null
+          },
+          "winner": null
         }
       ]
     }
