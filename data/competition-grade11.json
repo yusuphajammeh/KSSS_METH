@@ -353,6 +353,24 @@
             "points": 4
           },
           "winner": "Umar 1 / Bilal"
+        },
+        {
+          "id": 4,
+          "type": "best_loser",
+          "schedule": {
+            "date": "Pending",
+            "time": "TBD",
+            "location": "Maths Lab"
+          },
+          "teamA": {
+            "name": "Saffiah 1",
+            "points": null
+          },
+          "teamB": {
+            "name": "Ousman",
+            "points": null
+          },
+          "winner": null
         }
       ]
     }
