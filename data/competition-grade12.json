@@ -14,9 +14,15 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Zainab 1", "points": 17 },
-          "teamB": { "name": "Fatimah 1", "points": 0 },
-          "winner": "Zainab 1"
+          "teamA": {
+            "name": "Zainab 1",
+            "points": null
+          },
+          "teamB": {
+            "name": "Fatimah 1",
+            "points": null
+          },
+          "winner": null
         },
         {
           "id": 2,
@@ -25,8 +31,14 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Ousman", "points": null },
-          "teamB": { "name": "Roheyah", "points": null },
+          "teamA": {
+            "name": "Ousman",
+            "points": null
+          },
+          "teamB": {
+            "name": "Roheyah",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -36,8 +48,14 @@
             "time": "Pending",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Hamza", "points": null },
-          "teamB": { "name": "Zainab 2", "points": null },
+          "teamA": {
+            "name": "Hamza",
+            "points": null
+          },
+          "teamB": {
+            "name": "Zainab 2",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -47,8 +65,14 @@
             "time": "4:50 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Saffiah 1", "points": null },
-          "teamB": { "name": "Naffisah 2", "points": null },
+          "teamA": {
+            "name": "Saffiah 1",
+            "points": null
+          },
+          "teamB": {
+            "name": "Naffisah 2",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -58,8 +82,14 @@
             "time": "4:50 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Umar 2", "points": null },
-          "teamB": { "name": "Fatimah 2", "points": null },
+          "teamA": {
+            "name": "Umar 2",
+            "points": null
+          },
+          "teamB": {
+            "name": "Fatimah 2",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -69,8 +99,14 @@
             "time": "11:20 AM (Morning Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Umar 1", "points": null },
-          "teamB": { "name": "Aisha 1", "points": null },
+          "teamA": {
+            "name": "Umar 1",
+            "points": null
+          },
+          "teamB": {
+            "name": "Aisha 1",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -80,8 +116,14 @@
             "time": "4:50 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Saffiah 2", "points": null },
-          "teamB": { "name": "Ebrima", "points": null },
+          "teamA": {
+            "name": "Saffiah 2",
+            "points": null
+          },
+          "teamB": {
+            "name": "Ebrima",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -91,8 +133,14 @@
             "time": "Pending",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Naffisah 1", "points": null },
-          "teamB": { "name": "Aisha 2", "points": null },
+          "teamA": {
+            "name": "Naffisah 1",
+            "points": null
+          },
+          "teamB": {
+            "name": "Aisha 2",
+            "points": null
+          },
           "winner": null
         },
         {
@@ -102,11 +150,161 @@
             "time": "12:15 PM (Afternoon Break)",
             "location": "Maths Lab"
           },
-          "teamA": { "name": "Bilal / Khadijah", "points": null },
-          "teamB": { "name": "Ali", "points": null },
+          "teamA": {
+            "name": "Bilal / Khadijah",
+            "points": null
+          },
+          "teamB": {
+            "name": "Ali",
+            "points": null
+          },
           "winner": null
         }
       ]
+    }
+  ],
+  "structuralLog": [
+    {
+      "action": "Cascade Delete Round",
+      "timestamp": "2026-02-19T03:29:41.935Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 1,
+        "timestamp": "2026-02-19T03:29:41.935Z"
+      }
+    },
+    {
+      "action": "End Tournament",
+      "timestamp": "2026-02-19T14:52:16.849Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 4,
+        "timestamp": "2026-02-19T14:52:16.849Z"
+      }
+    },
+    {
+      "action": "Unlock Final Round",
+      "timestamp": "2026-02-19T14:54:23.752Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 4,
+        "roundName": "Round 5"
+      }
+    },
+    {
+      "action": "Cascade Delete Round",
+      "timestamp": "2026-02-19T15:01:12.118Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 4,
+        "timestamp": "2026-02-19T15:01:12.118Z"
+      }
+    },
+    {
+      "action": "Cascade Delete Round",
+      "timestamp": "2026-02-19T15:02:16.687Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 3,
+        "timestamp": "2026-02-19T15:02:16.687Z"
+      }
+    },
+    {
+      "action": "Cascade Delete Round",
+      "timestamp": "2026-02-19T15:02:29.384Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 2,
+        "timestamp": "2026-02-19T15:02:29.384Z"
+      }
+    },
+    {
+      "action": "Cascade Delete Round",
+      "timestamp": "2026-02-19T15:02:39.776Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "roundIndex": 1,
+        "timestamp": "2026-02-19T15:02:39.776Z"
+      }
+    }
+  ],
+  "auditLog": [
+    {
+      "timestamp": "2026-02-19T03:29:54.961Z",
+      "action": "CASCADE_DELETE_ROUNDS",
+      "user": "Y-JAMMEH",
+      "details": {
+        "deletedRounds": [
+          "Round 2"
+        ],
+        "matchesDeleted": 5,
+        "bestLoserMatchesDeleted": 0,
+        "unlockedRound": "Round 1",
+        "removedBestLoserFromUnlocked": true
+      }
+    },
+    {
+      "timestamp": "2026-02-19T15:02:08.648Z",
+      "action": "CASCADE_DELETE_ROUNDS",
+      "user": "Y-JAMMEH",
+      "details": {
+        "deletedRounds": [
+          "Round 5"
+        ],
+        "matchesDeleted": 1,
+        "bestLoserMatchesDeleted": 0,
+        "unlockedRound": "Round 4",
+        "removedBestLoserFromUnlocked": false
+      }
+    },
+    {
+      "timestamp": "2026-02-19T15:02:21.827Z",
+      "action": "CASCADE_DELETE_ROUNDS",
+      "user": "Y-JAMMEH",
+      "details": {
+        "deletedRounds": [
+          "Round 4"
+        ],
+        "matchesDeleted": 2,
+        "bestLoserMatchesDeleted": 0,
+        "unlockedRound": "Round 3",
+        "removedBestLoserFromUnlocked": true
+      }
+    },
+    {
+      "timestamp": "2026-02-19T15:02:34.061Z",
+      "action": "CASCADE_DELETE_ROUNDS",
+      "user": "Y-JAMMEH",
+      "details": {
+        "deletedRounds": [
+          "Round 3"
+        ],
+        "matchesDeleted": 3,
+        "bestLoserMatchesDeleted": 0,
+        "unlockedRound": "Round 2",
+        "removedBestLoserFromUnlocked": true
+      }
+    },
+    {
+      "timestamp": "2026-02-19T15:02:45.177Z",
+      "action": "CASCADE_DELETE_ROUNDS",
+      "user": "Y-JAMMEH",
+      "details": {
+        "deletedRounds": [
+          "Round 2"
+        ],
+        "matchesDeleted": 5,
+        "bestLoserMatchesDeleted": 0,
+        "unlockedRound": "Round 1",
+        "removedBestLoserFromUnlocked": true
+      }
     }
   ]
 }
