@@ -36,7 +36,7 @@
             "points": 20
           },
           "teamB": {
-            "name": "Naffisah 2",
+            "name": "Aisha 3",
             "points": null
           },
           "winner": null
@@ -104,7 +104,7 @@
             "points": null
           },
           "teamB": {
-            "name": "Aisha 3",
+            "name": "Naffisah 2",
             "points": null
           },
           "winner": null
@@ -719,6 +719,26 @@
         },
         "teamB": {
           "name": "Naffisah 2",
+          "match": 6,
+          "side": "B"
+        }
+      }
+    },
+    {
+      "action": "Team Swap",
+      "timestamp": "2026-02-22T12:31:40.104Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "timestamp": "2026-02-22T12:31:40.104Z",
+        "round": "Round 1",
+        "teamA": {
+          "name": "Naffisah 2",
+          "match": 2,
+          "side": "B"
+        },
+        "teamB": {
+          "name": "Aisha 3",
           "match": 6,
           "side": "B"
         }
