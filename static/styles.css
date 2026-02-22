@@ -241,6 +241,7 @@ h1 {
   z-index: 2;
   background: var(--card-bg);
   padding: 0 4px;
+  border-radius: 4px;
 }
 
 .leading {
@@ -253,7 +254,6 @@ h1 {
   background: var(--winner-bg) !important;
   border-radius: 10px;
   padding: 4px 6px;
-  /* restored to original */
 }
 
 /* Match Schedule Layout */
@@ -324,7 +324,6 @@ h1 {
 
 .theme-toggle:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  /* transform removed */
 }
 
 .match-schedule .schedule-date {
@@ -530,35 +529,171 @@ h1 {
   }
 }
 
-/* --- Round color variations (add at the end) --- */
+/* --- Round color variations for round titles --- */
 .round-1 .round-title {
   border-left-color: #0d47a1;
-  /* deep blue */
 }
 
 .round-2 .round-title {
   border-left-color: #2e7d32;
-  /* green */
 }
 
 .round-3 .round-title {
   border-left-color: #b71c1c;
-  /* red */
 }
 
 .round-4 .round-title {
   border-left-color: #ff6f00;
-  /* amber */
 }
 
 .round-5 .round-title {
   border-left-color: #6a1b9a;
-  /* purple */
 }
 
 .round-6 .round-title {
   border-left-color: #00796b;
-  /* teal */
 }
 
-/* Add more as needed */
+/* --- Round color variations for match cards: left border (same as best loser) --- */
+.round-1 .match {
+  border-left: 5px solid #0d47a1;
+}
+
+.round-2 .match {
+  border-left: 5px solid #2e7d32;
+}
+
+.round-3 .match {
+  border-left: 5px solid #b71c1c;
+}
+
+.round-4 .match {
+  border-left: 5px solid #ff6f00;
+}
+
+.round-5 .match {
+  border-left: 5px solid #6a1b9a;
+}
+
+.round-6 .match {
+  border-left: 5px solid #00796b;
+}
+
+/* --- Round badges for normal matches (identical to best loser badge) --- */
+.round-badge {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.round-1 .round-badge {
+  background: #0d47a1;
+}
+
+.round-2 .round-badge {
+  background: #2e7d32;
+}
+
+.round-3 .round-badge {
+  background: #b71c1c;
+}
+
+.round-4 .round-badge {
+  background: #ff6f00;
+}
+
+.round-5 .round-badge {
+  background: #6a1b9a;
+}
+
+.round-6 .round-badge {
+  background: #00796b;
+}
+
+/* --- Background for normal matches (solid light tint, just like best loser's solid background) --- */
+.round-1 .match:not(.best-loser-match) {
+  background: rgba(13, 71, 161, 0.1);
+}
+
+.round-2 .match:not(.best-loser-match) {
+  background: rgba(46, 125, 50, 0.1);
+}
+
+.round-3 .match:not(.best-loser-match) {
+  background: rgba(183, 28, 28, 0.1);
+}
+
+.round-4 .match:not(.best-loser-match) {
+  background: rgba(255, 111, 0, 0.1);
+}
+
+.round-5 .match:not(.best-loser-match) {
+  background: rgba(106, 27, 154, 0.1);
+}
+
+.round-6 .match:not(.best-loser-match) {
+  background: rgba(0, 121, 107, 0.1);
+}
+
+/* Dark mode: slightly stronger opacity to stand out on dark background */
+[data-theme="dark"] .round-1 .match:not(.best-loser-match) {
+  background: rgba(13, 71, 161, 0.2);
+}
+
+[data-theme="dark"] .round-2 .match:not(.best-loser-match) {
+  background: rgba(46, 125, 50, 0.2);
+}
+
+[data-theme="dark"] .round-3 .match:not(.best-loser-match) {
+  background: rgba(183, 28, 28, 0.2);
+}
+
+[data-theme="dark"] .round-4 .match:not(.best-loser-match) {
+  background: rgba(255, 111, 0, 0.2);
+}
+
+[data-theme="dark"] .round-5 .match:not(.best-loser-match) {
+  background: rgba(106, 27, 154, 0.2);
+}
+
+[data-theme="dark"] .round-6 .match:not(.best-loser-match) {
+  background: rgba(0, 121, 107, 0.2);
+}
+
+/* --- VS background for normal matches (solid round color, like best loser's white VS) --- */
+.round-1 .match:not(.best-loser-match) .vs {
+  background: #0d47a1;
+  color: white;
+}
+
+.round-2 .match:not(.best-loser-match) .vs {
+  background: #2e7d32;
+  color: white;
+}
+
+.round-3 .match:not(.best-loser-match) .vs {
+  background: #b71c1c;
+  color: white;
+}
+
+.round-4 .match:not(.best-loser-match) .vs {
+  background: #ff6f00;
+  color: white;
+}
+
+.round-5 .match:not(.best-loser-match) .vs {
+  background: #6a1b9a;
+  color: white;
+}
+
+.round-6 .match:not(.best-loser-match) .vs {
+  background: #00796b;
+  color: white;
+}

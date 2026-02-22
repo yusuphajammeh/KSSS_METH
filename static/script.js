@@ -63,7 +63,14 @@ fetch(jsonFile)
           matchDiv.className = "match";
 
           const isBestLoser = match?.type === "best_loser";
-          if (isBestLoser) {
+
+          // Add round badge for normal matches
+          if (!isBestLoser) {
+            const roundBadge = document.createElement("div");
+            roundBadge.className = "round-badge";
+            roundBadge.textContent = round?.name || `Round ${round.id || index + 1}`;
+            matchDiv.appendChild(roundBadge);
+          } else {
             matchDiv.classList.add("best-loser-match");
             const badge = document.createElement("div");
             badge.className = "best-loser-badge";
