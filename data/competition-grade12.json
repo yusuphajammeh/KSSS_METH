@@ -104,7 +104,7 @@
             "points": 10
           },
           "teamB": {
-            "name": "Aisha 1",
+            "name": "Aisha 2",
             "points": null
           },
           "winner": null
@@ -138,7 +138,7 @@
             "points": null
           },
           "teamB": {
-            "name": "Aisha 2",
+            "name": "Aisha 1",
             "points": null
           },
           "winner": null
@@ -161,6 +161,28 @@
           "winner": null
         }
       ]
+    }
+  ],
+  "structuralLog": [
+    {
+      "action": "Team Swap",
+      "timestamp": "2026-02-26T20:48:53.120Z",
+      "admin": "Y-JAMMEH",
+      "details": {
+        "admin": "Y-JAMMEH",
+        "timestamp": "2026-02-26T20:48:53.119Z",
+        "round": "Round 1",
+        "teamA": {
+          "name": "Aisha 1",
+          "match": 6,
+          "side": "B"
+        },
+        "teamB": {
+          "name": "Aisha 2",
+          "match": 8,
+          "side": "B"
+        }
+      }
     }
   ]
 }
